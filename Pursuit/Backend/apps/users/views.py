@@ -22,7 +22,11 @@ class SignUpAPI(generics.CreateAPIView):
         refresh = RefreshToken.for_user(user)
         print(serializer.data)
         return Response({
-        "user": serializer.data,
+        "user":{
+    
+"id":serializer.data.get("id"),    "full_name":serializer.data.get("full_name"),
+    "email":serializer.data.get("email")
+        } ,
         "refresh": str(refresh),
         "access": str(refresh.access_token),
     }, status=201)
